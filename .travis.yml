@@ -17,7 +17,7 @@ script: cd "core/java/registry" && mvn clean install -DskipTests=true
 
 before_deploy:
   - cd ../../../
-  - zip -r TeamBash_registry.zip core/java/registry scripts appspec.yml || true
+  - zip -r TeamBash_registry.zip core/java/registry scripts appspec.yml Dockerfile || true
   - mkdir -p "registry_upload"
   - mv TeamBash_registry.zip registry_upload/TeamBash_registry.zip || true
 
