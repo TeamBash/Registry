@@ -7,9 +7,11 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import iu.edu.teambash.core.LogEntity;
 import iu.edu.teambash.core.UsersEntity;
+import iu.edu.teambash.db.JobDao;
 import iu.edu.teambash.db.LogDao;
 import iu.edu.teambash.db.UserDao;
 import iu.edu.teambash.resources.DisplayData;
+import iu.edu.teambash.resources.JobResource;
 import iu.edu.teambash.resources.UserResource;
 
 public class RegistryApplication extends Application<RegistryConfiguration> {
@@ -42,10 +44,14 @@ public class RegistryApplication extends Application<RegistryConfiguration> {
                     final Environment environment) {
         final UserDao userDao = new UserDao(hibernateBundle.getSessionFactory());
         final LogDao logDao = new LogDao(hibernateBundle.getSessionFactory());
+        final JobDao jobDao = new JobDao(hibernateBundle.getSessionFactory());
         final UserResource userResource = new UserResource(userDao);
         final DisplayData displayData = new DisplayData(logDao);
+        final JobResource jobResource = new JobResource(jobDao);
         environment.jersey().register(userResource);
         environment.jersey().register(displayData);
+        environment.jersey().register(jobResource);
+
     }
 
 }

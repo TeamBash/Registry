@@ -5,6 +5,7 @@
         <class>iu.edu.teambash.core.UsersEntity</class>
         <class>iu.edu.teambash.core.LogEntity</class>
         <class>iu.edu.teambash.core.MicroservicesEntity</class>
+        <class>iu.edu.teambash.core.JobEntity</class>
         <properties>
             <property name="openjpa.ConnectionURL"
                       value="jdbc:mysql://teambash.cfofssvi9hbo.us-west-2.rds.amazonaws.com:3306/TeamBash"/>
