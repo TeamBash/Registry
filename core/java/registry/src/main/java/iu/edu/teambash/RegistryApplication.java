@@ -5,6 +5,7 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import iu.edu.teambash.core.JobEntity;
 import iu.edu.teambash.core.LogEntity;
 import iu.edu.teambash.core.UsersEntity;
 import iu.edu.teambash.db.JobDao;
@@ -17,7 +18,7 @@ import iu.edu.teambash.resources.UserResource;
 public class RegistryApplication extends Application<RegistryConfiguration> {
 
     private final HibernateBundle<RegistryConfiguration> hibernateBundle =
-            new HibernateBundle<RegistryConfiguration>(UsersEntity.class, LogEntity.class) {
+            new HibernateBundle<RegistryConfiguration>(UsersEntity.class, LogEntity.class, JobEntity.class) {
                 @Override
                 public DataSourceFactory getDataSourceFactory(RegistryConfiguration configuration) {
                     return configuration.getDataSourceFactory();
@@ -51,7 +52,6 @@ public class RegistryApplication extends Application<RegistryConfiguration> {
         environment.jersey().register(userResource);
         environment.jersey().register(displayData);
         environment.jersey().register(jobResource);
-
     }
 
 }

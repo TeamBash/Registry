@@ -7,6 +7,7 @@ import iu.edu.teambash.db.JobDao;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by janakbhalla on 10/12/16.
@@ -24,15 +25,15 @@ public class JobResource {
     @UnitOfWork
     @Path("/createJob")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createJob(JobEntity jobEntity) {
-        jobDao.create(jobEntity);
+    public JobEntity createJob(JobEntity jobEntity) {
+        return jobDao.create(jobEntity);
     }
 
     @GET
     @UnitOfWork
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/getDetails/{uid}")
-    public List<JobEntity> getJobDetails(@PathParam("uid") int uid){
-        return jobDao.findJobs(uid);
+    public List<String> getJobDetails(@PathParam("uid") int uid){
+        return jobDao.findJobs(uid).stream().map(JobEntity::getJobname).collect(Collectors.toList());
     }
 }
